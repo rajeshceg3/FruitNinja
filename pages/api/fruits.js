@@ -1,8 +1,21 @@
 import { mockFruits } from '../../data/fruits';
 
 export default function handler(req, res) {
-  const { day, benefit } = req.query;
+  const { id, day, benefit } = req.query;
 
+  if (id) {
+    const fruitId = parseInt(id, 10);
+    const foundFruit = mockFruits.find(fruit => fruit.id === fruitId);
+
+    if (foundFruit) {
+      res.status(200).json({ fruit: foundFruit });
+    } else {
+      res.status(404).json({ message: 'Fruit not found' });
+    }
+    return; // End execution if ID is provided
+  }
+
+  // If no ID, proceed with existing filtering logic
   let filteredFruits = mockFruits;
 
   // Day-based filtering
