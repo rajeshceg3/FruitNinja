@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import Head from 'next/head';
-import Image from 'next/image';
+import FruitImage from '../../components/FruitImage';
 import Link from 'next/link'; // Import Link
 
 const FruitDetailPage = () => {
@@ -19,7 +19,7 @@ const FruitDetailPage = () => {
     setIsLoading(true);
     setError(null);
 
-    fetch(`/api/fruits?id=${id}`)
+    fetch(`/api/fruits?id=${encodeURIComponent(id)}`)
       .then(async (res) => {
         if (res.ok) {
           const data = await res.json();
@@ -143,13 +143,7 @@ const FruitDetailPage = () => {
         <>
           <h1 style={styles.pageTitle}>{fruit.name}</h1>
           <div style={styles.imageContainer}>
-            <Image
-              src={fruit.imageUrl || '/images/placeholder.png'}
-              alt={fruit.name}
-              width={300} // Increased image size
-              height={300} // Increased image size
-              style={styles.image}
-            />
+            <FruitImage key={fruit.id} fruit={fruit} detail />
           </div>
 
           {fruit.description && (

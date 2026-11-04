@@ -12,6 +12,7 @@ export default function BenefitFilter() {
       {allBenefits.map(benefit => (
         <button
           key={benefit}
+          aria-pressed={selectedBenefit === benefit}
           onClick={() => setSelectedBenefit(selectedBenefit === benefit ? '' : benefit)} // Toggle functionality
           style={{
             padding: '0.5rem',

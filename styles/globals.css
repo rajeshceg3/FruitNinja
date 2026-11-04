@@ -91,3 +91,10 @@ button:hover {
   color: #555;
   margin-bottom: 0.25rem;
 }
+
+* { box-sizing: border-box; }
+.fruit-card-container { overflow-wrap: anywhere; }
+.fruit-detail-image { max-width: 100%; height: auto; }
+a:focus-visible, button:focus-visible, select:focus-visible { outline: 3px solid #005fcc; outline-offset: 3px; }
+
+.fruit-image-unavailable { color: #555; font-size: .9rem; font-style: italic; }
