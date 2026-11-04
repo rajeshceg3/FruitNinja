@@ -2,6 +2,8 @@
 import { create } from 'zustand';
 import { allBenefits as initialAllBenefits, allDays as initialAllDays } from '../data/fruits';
 
+let requestVersion = 0;
+
 const useFruitStore = create((set, get) => ({
   selectedDay: '',
   selectedBenefit: '',
@@ -25,6 +27,7 @@ const useFruitStore = create((set, get) => ({
 
   // Action to fetch fruits from the API
   fetchFruits: async () => {
+    const version = ++requestVersion;
     const { selectedDay, selectedBenefit } = get();
     if (!selectedDay) {
       // Don't fetch if no day is selected, or set a default behavior
@@ -44,8 +47,11 @@ const useFruitStore = create((set, get) => ({
         throw new Error(`API Error: ${response.status} ${response.statusText}`);
       }
       const data = await response.json();
+      if (version !== requestVersion) return;
+      if (!Array.isArray(data.fruits)) throw new Error("Invalid fruit response");
       set({ fruits: data.fruits, isLoading: false });
     } catch (error) {
+      if (version !== requestVersion) return;
       console.error('Failed to fetch fruits:', error);
       set({ fruits: [], isLoading: false, error: error.message });
     }

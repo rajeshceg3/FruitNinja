@@ -38,3 +38,7 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+## Purpose-fit verification
+
+This source is Fruitful Days, a mock-data daily fruit planner. Follow [.cursor/skills/verify-fruit-planner/SKILL.md](.cursor/skills/verify-fruit-planner/SKILL.md) for clean production build, actual browser/API journeys and their limits. No database or secret is needed. Missing source photos get explicit unavailable messages; actual photography and health claims remain unverified.

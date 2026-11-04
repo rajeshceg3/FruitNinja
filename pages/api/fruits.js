@@ -1,7 +1,15 @@
 import { mockFruits } from '../../data/fruits';
 
 export default function handler(req, res) {
+  if (req.method !== 'GET') {
+    res.setHeader('Allow', 'GET');
+    return res.status(405).json({ message: 'Method not allowed' });
+  }
   const { id, day, benefit } = req.query;
+  if ([id, day, benefit].some(value => value !== undefined && typeof value !== 'string') ||
+      (id !== undefined && !/^[1-9]\d*$/.test(id))) {
+    return res.status(400).json({ message: 'Invalid query parameters' });
+  }
 
   if (id) {
     const fruitId = parseInt(id, 10);
